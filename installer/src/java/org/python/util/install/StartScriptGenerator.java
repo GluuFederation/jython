@@ -69,8 +69,8 @@ public class StartScriptGenerator {
     protected final void generateStartScripts() throws IOException {
         Path bindir = _targetDirectory.toPath().resolve("bin");
         if (Installation.isWindows()) {
-            Files.delete(bindir.resolve("jython"));
-            Files.delete(bindir.resolve("jython.py"));
+            Files.deleteIfExists(bindir.resolve("jython"));
+            Files.deleteIfExists(bindir.resolve("jython.py"));
         }
         else {
             String shebang = getShebang();
@@ -79,9 +79,9 @@ public class StartScriptGenerator {
                         bindir.resolve("jython.py").toFile(),
                         bindir.resolve("jython").toFile());
             }
-            Files.delete(bindir.resolve("jython.py"));
-            Files.delete(bindir.resolve("jython.exe"));
-            Files.delete(bindir.resolve("python27.dll"));
+            Files.deleteIfExists(bindir.resolve("jython.py"));
+            Files.deleteIfExists(bindir.resolve("jython.exe"));
+            Files.deleteIfExists(bindir.resolve("python27.dll"));
             Files.setPosixFilePermissions(bindir.resolve("jython"),
                     PosixFilePermissions.fromString("rwxr-xr-x")); // 0755
         }
